@@ -5,15 +5,24 @@ function Footer(props) {
   return (
     <Box
       textAlign={"center"}
-      borderTop={"2px solid #f2f2f2"}
+      borderTop={"1px solid #f2f2f2"}
+      _dark={{
+        borderColor: "#ffffff29",
+      }}
       mx={5}
       py={4}
       mt={24}
     >
-      <Text fontFamily={"mono"} fontSize={"sm"} color={"#2D3748"}>
+      <Text fontFamily={"inter"} fontSize={"sm"} color={"#2D3748"} _dark={{color:"#a1a1aa"}} >
         Proudly made in &#x1F1EE;&#x1F1F3; by Ritik Kumar
       </Text>
-      <Flex columnGap={2} justifyContent={"center"} mt={4} color={"#A0AEC0"} fontSize={20}>
+      <Flex
+        columnGap={2}
+        justifyContent={"center"}
+        mt={4}
+        color={"#A0AEC0"}
+        fontSize={20}
+      >
         <a
           target="_blank"
           rel="noopener"

@@ -12,14 +12,18 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  Link,
 } from "@chakra-ui/react";
 import banner from "../assets/banner.png";
 import BuyCoffee from "./BuyCoffee";
 import { ArrowRightIcon } from "@chakra-ui/icons";
-import {FaGithubAlt} from 'react-icons/fa'
+import { FaGithubAlt } from "react-icons/fa";
 
 export default function Hero({ state }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const handleClose = (data) => {
+    onClose(data)
+  }
   return (
     <Box
       bgImage={banner}
@@ -28,11 +32,13 @@ export default function Hero({ state }) {
       margin={4}
       borderRadius={10}
     >
-      <Text mt={2} fontSize={["16", "18"]}>
+      <Text mt={2} fontSize={["16", "18"]} _dark={{color:"#181818"}}>
         Hey There...✔
       </Text>
-      <Heading fontFamily={"poppins"} fontWeight= {700} >Buy a cup of Coffee ☕ for Ritik</Heading>
-      <Text mt={2} fontSize={["16", "18"]} color={"#181818"}>
+      <Heading fontFamily={"poppins"} fontWeight={700} _dark={{color:"#181818"}} >
+        Buy a cup of Coffee ☕ for Ritik
+      </Heading>
+      <Text mt={2} fontSize={["14", "15", "18"]} color={"#181818"}>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam eius
         ut hic eos dicta? Ducimus saepe voluptate voluptates sint veritatis.
       </Text>
@@ -47,17 +53,28 @@ export default function Hero({ state }) {
       >
         Click To Pay &nbsp; <ArrowRightIcon fontSize={10} />
       </Button>
-      <Button  mt={3} ml={2} rightIcon={<FaGithubAlt  />} variant={"solid"}>
+      <Button
+        as={"a"}
+        mt={3}
+        ml={2}
+        href="https://github.com/iritikdev/BuyMeCoffee"
+        target="_blank"
+        rightIcon={<FaGithubAlt />}
+        isExternal
+        _dark={{color:"#181818", bgColor: "#f2f2f2"}}
+      >
         Github
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Start ethereum transaction</ModalHeader>
+          <ModalHeader fontFamily={"poppins"}>
+            Start ethereum transaction
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <BuyCoffee state={state} />
+            <BuyCoffee state={state} onClose = {handleClose} />
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -1,6 +1,16 @@
-import { Box, Button, Container, Flex, Link, Text } from "@chakra-ui/react";
-import {MdOutlineDarkMode} from 'react-icons/md'
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  IconButton,
+  Link,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 const Navbar = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Box>
       <Container maxW="container.xl">
@@ -9,7 +19,6 @@ const Navbar = () => {
             href="#"
             fontWeight="700"
             variant={"outline"}
-            // backgroundColor={"#181818"}
             color={"#181818"}
             border={"2px solid #181818"}
             boxShadow={"4px 4px #181818"}
@@ -17,13 +26,29 @@ const Navbar = () => {
               opacity: "0.9",
               boxShadow: "none",
             }}
+            _dark={{
+              color: "#f3f2f2",
+              border: "2px solid #f2f2f2",
+              boxShadow: "4px 4px #f2f2f2",
+              _hover: {
+                boxShadow: "none",
+              },
+            }}
           >
             CaféToken
           </Button>
 
-          <Button  bgColor={"#181818"} color={"#fff"} variant="solid">
-            <MdOutlineDarkMode fontSize={18} />
-          </Button>
+          <IconButton
+            onClick={toggleColorMode}
+            icon={
+              colorMode == "dark" ? (
+                <MdOutlineLightMode fontSize={24} />
+              ) : (
+                <MdOutlineDarkMode fontSize={24} />
+              )
+            }
+            _hover={{ backgroundColor: "#181818", color: "#A8A8A8" }}
+          />
         </Flex>
       </Container>
     </Box>

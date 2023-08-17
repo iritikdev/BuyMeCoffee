@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { parseEther } from "ethers";
 import {
   useToast,
@@ -10,24 +10,31 @@ import {
   FormControl,FormLabel ,Input 
 } from "@chakra-ui/react";
 
-export default function BuyCoffee({ state }) {
+export default function BuyCoffee({ state, onClose }) {
   const toast = useToast();
-  const buyCoffee = async (e) => {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [isCompleted, setIsCompleted] = useState(false)
+  const handlePay = async (e) => {
     e.preventDefault();
-    const AMOUNT = "0.001";
+    const AMOUNT = "0.0001";
     const { contract } = state;
-
-    const name = document.querySelector("#name").value;
-    const message = document.querySelector("#message").value;
-
     const amount = { value: parseEther(AMOUNT) };
+
+    setIsCompleted(true);
+
     const transaction = await contract.buyCoffee(name, message, amount);
     await transaction.wait();
 
-    // provide a toast
+    setIsCompleted(false);
+    setName("")
+    setMessage("")
+
+    onClose(false)
+
     toast({
       title: "Transaction Successful 🚀",
-      description: "Account balance duduced with ${AMOUNT} ETH.",
+      description:  `Account balance duduced with ${AMOUNT} ETH.`,
       status: "success",
       duration: 9000,
       isClosable: true,
@@ -40,7 +47,7 @@ export default function BuyCoffee({ state }) {
             <FormLabel>Name</FormLabel>
             <Input
               type="text"
-              // value={name}
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </FormControl>
@@ -49,7 +56,7 @@ export default function BuyCoffee({ state }) {
             <FormLabel>Message</FormLabel>
             <Input
               type="text"
-              // value={message}
+              value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
           </FormControl>
@@ -60,7 +67,8 @@ export default function BuyCoffee({ state }) {
             _hover={{
               opacity: "0.9",
             }}
-            // isLoading={props.isSubmitting}
+            onClick={(e) => handlePay(e)}
+            isLoading = {isCompleted}
             type="submit"
           >
             Pay 💰

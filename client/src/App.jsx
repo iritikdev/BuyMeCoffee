@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { BrowserProvider, Contract } from "ethers";
+import { Flex } from "@chakra-ui/react";
 
 import abi from "./contract/Coffee.json";
 import BuyCoffee from "./components/BuyCoffee";
 import MemosTable from "./components/MemosTable";
-import { Flex } from "@chakra-ui/react";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
